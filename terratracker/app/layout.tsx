@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Terratracker",
+  title: "TerraTracker",
   description: "Earthquake visualization app",
 };
 

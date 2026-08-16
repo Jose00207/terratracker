@@ -9,6 +9,7 @@ export default async function Home() {
       <main>
         <Map children = {data}/>
         <InfoBar children = {data}></InfoBar>
+        <p className="text-lg font-space-gortesk absolute bottom-0 left-2">TerraTracker</p>
       </main>
     </div>
   );

@@ -1,48 +1,36 @@
 "use client"
-import {useEffect, useRef} from "react";
+import {useState} from "react";
+import Image from "next/image";
 
 export default function Map({children: data}: any) {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    useEffect(() => {
-        const context = canvasRef.current?.getContext("2d");
-        const map = new Image();
-        canvasRef.current!.width = window.innerWidth;
-        canvasRef.current!.height = window.innerHeight;
-        map.src = "/map.svg"
 
-        const lonMin = -180
-        const lonMax = 180
-        const latMin = -90
-        const latMax = 90
+    const [minLong, maxLong] = [-180, 180];
+    const [minLat, maxLat] = [-90, 90];
 
-        var [lastPointX, lastPointY] = [0, 0];
-        map.onload = () => {
-            context?.drawImage(map, 0, 0, window.innerWidth, window.innerHeight); 
+    const [isOver, setIsOver] = useState<number | null>(null);
 
-            data.features.forEach((feature: any) => {
-                const {coordinates} = feature.geometry;
-                const [x, y] = coordinates;
-                const canvasX = ((x - lonMin) / (lonMax - lonMin)) * window.innerWidth;
-                const canvasY = ((latMax - y) / (latMax - latMin)) * window.innerHeight;
-                context?.beginPath();
-                context?.arc(canvasX, canvasY, feature.properties.mag, 0, Math.PI * 2);
-                context!.fillStyle = `rgba(255, ${255 - Math.floor(feature.properties.mag * 25)}, 0)`;
-                context?.fill();
-                context?.closePath();
-                /*context?.beginPath();
-                context?.moveTo(canvasX, canvasY);
-                context?.lineTo(lastPointX != 0 ? lastPointX : canvasX, lastPointY != 0 ? lastPointY : canvasY);
-                [lastPointX, lastPointY] = [canvasX, canvasY];
-                context!.strokeStyle = `rgba(255, 0, 0)`;
-                context?.stroke();
-                context?.closePath();
-                */
-            });
-        }
-    }, []);
-    return(
+    return (
         <div>
-            <canvas ref={canvasRef}/>
-        </div>
+            <Image src="/map.svg" alt="World Map" fill />
+            <svg viewBox="0 0 1200 600" className="absolute top-0 left-0 w-full h-full">
+               {data.features.map((feature: any, index: number) => {
+                    const [x, y] = feature.geometry.coordinates;
+                    const long = (x - minLong) / (maxLong - minLong) * 1200;
+                    const lat = (maxLat - y) / (maxLat - minLat) * 600;
+                    return (
+                        <circle key={index} cx={long} cy={lat} r={feature.properties.mag} fill={`rgb(255, ${255 - (feature.properties.mag * 25)}, 0)`} className="hover:fill-amber-50" onMouseEnter={() => setIsOver(index)} onMouseLeave={() => setIsOver(null)}/>
+                )})};
+                {data.features.map((feature: any, index: number) => {
+                     const [x, y] = feature.geometry.coordinates;
+                    const long = (x - minLong) / (maxLong - minLong) * 1200;
+                    const lat = (maxLat - y) / (maxLat - minLat) * 600;
+                    return (
+                        <foreignObject key={index} x={long} y={lat} width={200} height={100} className="pointer-events-none" >
+                                {isOver === index && <div className="bg-zinc-800 text-sm rounded-sm p-2">{feature.properties.title}</div>}
+                        </foreignObject>
+                    )
+                })};
+            </svg>
+        </div>   
     )
 }
