@@ -11,8 +11,8 @@ export default async (request: Request) => {
 
     console.log(subscription)
 
-    const { error } = await supabase.from("push_subscriptions").insert(subscription)
-    
+    const { error } = await supabase.from("push_subscriptions").insert({subscription: subscription})
+
     console.log(error)
 
     if (error) {
