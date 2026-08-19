@@ -9,6 +9,8 @@ const supabase = createClient<Database>(
 export default async (request: Request) => {
     const subscription = await request.json();
 
+    console.log(subscription)
+
     const { error } = await supabase.from("push_subscriptions").insert(subscription)
 
     if (error) {
