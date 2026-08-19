@@ -23,9 +23,19 @@ export async function getFeature(){
     const {data, error} = await supabase.from("last_feature").select("*")
     
     if (error){
-        throw error
+        throw error;
     }
 
-    return data[0]
-
+    return data[0];
 }
+
+export async function getSubs(){
+    const {data, error} = await supabase.from("push_subscriptions").select("subscription")
+
+    if (error){
+        throw error;
+    }
+
+    return data;
+}
+

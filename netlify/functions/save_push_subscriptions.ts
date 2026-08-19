@@ -1,0 +1,17 @@
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "../../database.types"
+
+const supabase = createClient<Database>(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+)
+
+export async function savePushSubs(request: Request){
+    const subscription = await request.json();
+
+    const { error } = await supabase.from("push_subscriptions").insert(subscription)
+
+    if (error) {
+        return new Response(error.message, { status: 500 });
+    }
+}

@@ -23,12 +23,8 @@ export default function Map({children: data}: any) {
                     const rTime = Math.floor(255 * mod);
                     const gTime = Math.floor(255 * (1 - mod));
 
-                    const gMag = Math.floor(255 * (feature.properties.mag / 10));
-
-                    if (index === 0){
-                        console.log(index, d)
-                    }
-
+                    const gMag = Math.floor(255 * (feature.properties.mag / 10))
+                    
                     return (
                         <g key={index}>
                             <line x1={long} y1={lat} x2={long} y2={lat - (lat * (data.features.length - index) / data.features.length)} stroke={`rgb(${rTime}, ${gTime}, 0, 0.5)`} strokeWidth="1" />
