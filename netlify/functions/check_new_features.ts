@@ -25,7 +25,7 @@ export default async () => {
                 sub.subscription as unknown as PushSubscription,
                 JSON.stringify({
                     title: "New earthquake",
-                    body: `${latest.title}`
+                    body: `${latest.properties.title}`
                 })
             )
        }
