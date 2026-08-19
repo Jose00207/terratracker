@@ -367,7 +367,7 @@ export async function getData(){
 
 export async function getLatest(){
   const data = await fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`);
-  return data.json()
+  return data.json();
 }
 
 export async function getByTime(year1: String, month1: String, day1: String, year2: String, month2: String, day2: String, limit: String){
