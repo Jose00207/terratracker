@@ -6,7 +6,7 @@ const supabase = createClient<Database>(
     process.env.SUPABASE_SECRET_KEY!
 )
 
-export async function savePushSubs(request: Request){
+export default async (request: Request) => {
     const subscription = await request.json();
 
     const { error } = await supabase.from("push_subscriptions").insert(subscription)
