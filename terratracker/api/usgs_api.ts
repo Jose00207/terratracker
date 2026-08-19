@@ -1,5 +1,5 @@
 export async function getData(){
-    const data = await fetch('https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-01-01&endtime=2026-08-16&minmagnitude=5.0&maxmagnitude=10&orderby=time&limit=100');
+    const data = await fetch('https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-01-01&endtime=2026-08-16&minmagnitude=4.0&maxmagnitude=10&orderby=time&limit=100');
     return data.json()
     /* return {"features": [
     {
@@ -363,4 +363,13 @@ export async function getData(){
       "id": "us6000tjfj"
     }
   ],} */
+}
+
+export async function getLatest(){
+  const data = await fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`);
+  return data.json()
+}
+
+export async function getByTime(year1: String, month1: String, day1: String, year2: String, month2: String, day2: String, limit: String){
+  const data = await fetch(`https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-01-01&endtime=2026-08-16&minmagnitude=4.0&maxmagnitude=10&orderby=time&limit=100`)
 }

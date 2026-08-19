@@ -17,7 +17,7 @@ export default function InfoBar({ children: data }: any) {
                         const date = new Date(feature.properties.time);
                         return (
                             <div key={index} className="font-inter text-indigo-100 bg-black/20 p-2 rounded-sm mb-1">
-                                <p className="text-sm">{feature.properties.place} - Mag: {feature.properties.mag} - Date: {date.toLocaleDateString()}</p>
+                                <p className="text-sm">{feature.properties.place} - Mag: {feature.properties.mag} - Date: {date.toLocaleString()}</p>
                             </div>
                         );
                     })}           
