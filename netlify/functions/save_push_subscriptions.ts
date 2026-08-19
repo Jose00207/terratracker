@@ -12,6 +12,8 @@ export default async (request: Request) => {
     console.log(subscription)
 
     const { error } = await supabase.from("push_subscriptions").insert(subscription)
+    
+    console.log(error)
 
     if (error) {
         return new Response(error.message, { status: 500 });
