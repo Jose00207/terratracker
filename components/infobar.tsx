@@ -6,7 +6,7 @@ export default function InfoBar({ children: data }: any) {
     const [isOpen, setIsOpen] = useState(true);
     return (
             <div className="absolute top-0 right-0 max-h-screen w-64 overflow-y-scroll scrollbar-thin scrollbar-thumb-indigo-100">
-                <div className="fixed text-lg  text-indigo-100 bg-black flex w-full">
+                <div className="fixed text-lg font-inter text-indigo-100 bg-black flex w-full">
                     <p>Recent Activity</p>
                     <button className="fixed right-5 top-1 z-100 text-indigo-100 hover:text-white text-sm" onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? "Hide" : "Show"}
