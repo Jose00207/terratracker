@@ -1,5 +1,5 @@
 import type { Config } from "@netlify/functions"
-import {updateFeature, getFeature} from "../../api/supabase"
+import {updateFeature, getFeature} from "./supabase"
 
 export default async () => {
     const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson");
