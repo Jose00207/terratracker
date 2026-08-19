@@ -3,7 +3,7 @@ import type { Database } from "../../database.types"
 
 const supabase = createClient<Database>(
     process.env.SUPABASE_URL!,
-    process.env.SUPABASE_PUBLISHABLE_KEY!
+    process.env.SUPABASE_SECRET_KEY!
 )
 
 export async function updateFeature(feature: GeoFeature){
