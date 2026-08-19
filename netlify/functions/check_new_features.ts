@@ -9,8 +9,6 @@ export default async () => {
 
     const stored_latest = await getFeature();
 
-    console.log(latest, stored_latest)
-
     if (latest.id !== stored_latest.feature_id){
        updateFeature(latest) 
     }
